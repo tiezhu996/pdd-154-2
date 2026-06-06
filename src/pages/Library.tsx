@@ -2,19 +2,16 @@ import React, { useState, useEffect, useRef } from 'react';
 import {
   Upload,
   Search,
-  Filter,
   Grid3X3,
   List,
   Move,
   Trash2,
   Share2,
-  Download,
   X,
   Folder,
   Image as ImageIcon,
   FileType,
   Copy,
-  Link,
   XCircle,
   Clock,
   CheckCircle2,
@@ -24,7 +21,7 @@ import { useToast } from '../components/Toast';
 import { Modal } from '../components/Modal';
 import { FolderTree } from '../components/FolderTree';
 import { AssetCard } from '../components/AssetCard';
-import { Asset, ShareWithDetails, SharePermission } from '../../shared/types';
+import { Asset, ShareWithDetails } from '../../shared/types';
 import { debounce, getTypeLabel, formatDate } from '../utils/format';
 import { api } from '../utils/api';
 import { useNavigate } from 'react-router-dom';

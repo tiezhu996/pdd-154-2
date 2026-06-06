@@ -124,8 +124,6 @@ export const api = {
   shares: {
     getByToken: (token: string) =>
       apiRequest(`/shares/${token}`, { method: 'GET' }),
-    getComments: (token: string) =>
-      apiRequest(`/shares/${token}/comments`, { method: 'GET' }),
     addComment: (token: string, data: { assetId?: number; guestName?: string; authorName?: string; content: string }) =>
       apiRequest(`/shares/${token}/comment`, {
         method: 'POST',
