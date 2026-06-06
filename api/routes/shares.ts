@@ -3,7 +3,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { ShareRepository } from '../repositories/ShareRepository.js';
 import { AuditLogRepository } from '../repositories/AuditLogRepository.js';
 import { authMiddleware, AuthRequest } from '../middleware/auth.js';
-import { ApiResponse, Share, Comment, CreateShareRequest, AddCommentRequest } from '../../shared/types.js';
+import { ApiResponse, Share, Comment, CreateShareRequest, AddCommentRequest, ShareWithDetails } from '../../shared/types.js';
 
 const router = Router();
 
@@ -75,6 +75,17 @@ router.post('/:token/comment', (req: AuthRequest, res: Response<ApiResponse<Comm
 });
 
 router.use(authMiddleware);
+
+
+router.get('/', (req: AuthRequest, res: Response<ApiResponse<ShareWithDetails[]>>) => {
+  try {
+    const shares = ShareRepository.findByCreatedByWithDetails(req.user!.id);
+    res.json({ success: true, data: shares });
+  } catch (error) {
+    console.error('Get shares error:', error);
+    res.status(500).json({ success: false, error: '获取分享列表失败' });
+  }
+});
 
 router.post('/', (req: AuthRequest, res: Response<ApiResponse<Share>>) => {
   try {

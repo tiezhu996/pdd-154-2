@@ -71,6 +71,23 @@ export interface Share {
   createdAt: string;
 }
 
+export interface ShareAssetInfo {
+  id: number;
+  name: string;
+  thumbnailPath: string;
+  type: AssetType;
+}
+
+export interface ShareFolderInfo {
+  id: number;
+  name: string;
+}
+
+export interface ShareWithDetails extends Share {
+  assets: ShareAssetInfo[];
+  folder?: ShareFolderInfo | null;
+}
+
 export interface Comment {
   id: number;
   shareId?: number;

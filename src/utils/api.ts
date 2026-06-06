@@ -138,6 +138,7 @@ export const api = {
       }),
     delete: (id: number) =>
       apiRequest(`/shares/${id}`, { method: 'DELETE' }),
+    getMyShares: () => apiRequest('/shares', { method: 'GET' }),
   },
   admin: {
     getUsers: () => apiRequest('/admin/users', { method: 'GET' }),
