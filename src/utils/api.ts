@@ -19,7 +19,7 @@ export async function apiRequest<T>(
     headers['Authorization'] = `Bearer ${token}`;
   }
 
-  if (!(options.body instanceof FormData)) {
+  if (!(options.body instanceof FormData) {
     headers['Content-Type'] = 'application/json';
   }
 
@@ -127,7 +127,7 @@ export const api = {
     getComments: (token: string) =>
       apiRequest(`/shares/${token}/comments`, { method: 'GET' }),
     addComment: (token: string, data: { assetId?: number; guestName?: string; authorName?: string; content: string }) =>
-      apiRequest(`/shares/${token}/comments`, {
+      apiRequest(`/shares/${token}/comment`, {
         method: 'POST',
         body: JSON.stringify(data),
       }),

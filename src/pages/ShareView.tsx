@@ -47,13 +47,7 @@ export const ShareView: React.FC = () => {
         setAssets(data.assets || []);
         setPermission(data.permission || 'readonly');
         setViewerName(data.createdBy?.name || '分享者');
-
-        if (data.permission === 'comment') {
-          const commentsRes = await api.shares.getComments(token);
-          if (commentsRes.success && commentsRes.data) {
-            setComments(commentsRes.data as Comment[]);
-          }
-        }
+        setComments(data.comments || []);
       } else {
         showToast(response.error || '分享链接无效或已过期', 'error');
       }

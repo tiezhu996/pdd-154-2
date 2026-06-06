@@ -126,14 +126,25 @@ router.delete('/:id', (req: AuthRequest, res: Response<ApiResponse<any>>) => {
   try {
     const { id } = req.params;
     const userId = req.user!.id;
+    const shareId = parseInt(id);
 
-    ShareRepository.delete(parseInt(id));
+    const share = ShareRepository.findById(shareId);
+    if (!share) {
+      res.status(404).json({ success: false, error: '分享不存在' });
+      return;
+    }
+    if (share.createdBy !== userId) {
+      res.status(403).json({ success: false, error: '无权操作该分享' });
+      return;
+    }
+
+    ShareRepository.delete(shareId);
 
     AuditLogRepository.create({
       userId,
       action: 'share',
       targetType: 'asset',
-      targetId: parseInt(id),
+      targetId: shareId,
       targetName: '取消分享',
     });
 
